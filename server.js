@@ -7,26 +7,33 @@ const MongoStore = require("connect-mongo")(session);
 const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
-const connectDB = require("./config/database");
-const { MongoClient } = require("mongodb");
 
 // requiring routes
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 const commentRoute = require('./routes/comments');
 
-
-const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri);
-
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
+
 // Passport config
 require("./config/passport")(passport);
 
-
 //Connect To Database
-connectDB();
+async function connectToDB() {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
+    console.log("Connected to the database");
+  } catch (error) {
+    console.error("Error connecting to the database:", error);
+  }
+}
+
+connectToDB();
 
 //Using EJS for views
 app.set("view engine", "ejs");
@@ -38,15 +45,14 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//adding middleware error
+//Logging
+app.use(logger("dev"));
+
+//Adding middleware error
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something went wrong!');
 });
-
-//
-//Logging
-app.use(logger("dev"));
 
 //Use forms for put / delete
 app.use(methodOverride("_method"));
@@ -68,24 +74,13 @@ app.use(passport.session());
 //Use flash messages for errors, info, ect...
 app.use(flash());
 
-//Setup Routes For Which The Server Is Listening
+// Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
-app.use('/comment', commentRoute)
+app.use('/comment', commentRoute);
 
-
-// client.connect(err => {
-//     if(err){ console.error(err); return false;}
-//Server Running
-
-client.connect(err => {
-
-  if(err){ console.error(err); return false}
-
-app.listen(process.env.PORT, () => {
-  console.log("Server is running, you better catch it!");
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
-});
-
-// })
