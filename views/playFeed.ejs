@@ -1,0 +1,58 @@
+<%- include('partials/head.ejs') %>
+
+<div>
+  <body class="bg-[#fefae0]">
+      <%- include('partials/playFeedNav.ejs') %>  
+    <div class="container mt-4 min-w-full p-4">
+        <div class="mt-5 max-w-lg mx-auto">
+            <ul class="list-unstyled mt-5">
+                <% for(var i=0; i<posts.length; i++) {%>
+                <li class="my-10">
+                    <div class="bg-[#ccd5ae] shadow-md rounded-md p-4 mb-5">
+                        <a href="/post/<%= posts[i]._id %>">
+                            <div class="">
+                                <p class="my-3 text-lg lg:text-xl">
+                                    <%= posts[i].caption %>
+                                </p>
+                                <div class="rounded-md overflow-hidden">
+                                    <img class="img-fluid" src="<%= posts[i].image %>" alt="user picture">
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto relative mt-2">
+                                <table class="w-full text-sm text-left lg:text-xl">
+                                    <thead class="text-sm lg:text-xl">
+                                        <tr class="text-[#005458]">
+                                            <th scope="col" class="px-2">Beginner</th>
+                                            <th scope="col" class="px-2">Intermediate</th>
+                                            <th scope="col" class="px-2">Advance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-[#333] font-semibold">
+                                            <td class="px-2"><%= posts[i].location %></td>
+                                            <td class="px-2"><%= posts[i].friends %></td>
+                                            <td class="px-2"><%= posts[i].grownups %></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="mt-4 mr-4 p-2">
+                                <i class="fa-regular fa-heart">
+                                <span>
+                                    <%= posts[i].likes %>
+                                </span> 
+                                </i>
+                            </div>
+                        </a>                     
+                        
+                        
+                    </div>
+                </li>
+         <%   } %>
+            </ul>
+        </div>
+    </div>
+  </body>
+</div>
+
+<%- include('partials/footer.ejs') %>

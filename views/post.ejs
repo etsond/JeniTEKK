@@ -1,0 +1,79 @@
+<%- include("partials/head.ejs") %>
+
+<div>
+  <body class="bg-[#fefae0]">
+    <%- include("partials/navbar.ejs") %>
+    <div class="container min-w-full mt-8 p-4">
+      <div class="mt-5 mx-auto">
+        <div class="bg-[#ebdee5] shadow-md rounded-md p-4 mb-5 items-center">
+          <div class="">
+            <img class=""src="<%= post.image%>" alt="" />
+            <div class="lg:w-full">
+              <p class="my-3 text-lg text-[#333] font-semibold xl:text-3xl">
+                <%= post.caption%>
+              </p>
+              <table class="w-full text-sm text-left lg:text-2xl ">
+                <thead class="text-sm lg:text-2xl">
+                  <tr class="text-[#005458]">
+                    <th scope="col" class="xl:pr-8 px-2">Beginner</th>
+                    <th scope="col" class="xl:pr-8 px-2">Intermediate</th>
+                    <th scope="col" class="xl:pr-8 px-2">Advance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="px-2"><%= post.location %></td>
+                    <td class="px-2"><%= post.friends %></td>
+                    <td class="px-2"><%= post.grownups %></td>
+                  </tr>
+                </tbody>
+              </table>
+              <div>
+                <div class="flex mt-3 p-2 gap-16">
+                    <form action="/post/likePost/<%= post._id%>?_method=PUT" method="POST" class="inline">
+                        <button type="submit">
+                            <i class="fa-regular fa-heart">  <%= post.likes %></i> 
+                        </button>
+                    </form>
+                    <div>
+                      <%if(post.user == user.id){ %>
+                        <form
+                          action="/post/deletePost/<%= post.id%>?_method=DELETE"
+                          method="POST"
+                        >
+                          <button class="" type="submit">
+                            <i class="fa-solid fa-trash"></i>
+                          </button>
+                        </form>
+                      <% } %> 
+                    </div>                                
+                </div>
+            </div>
+              <div class="mt-5 flex">
+                <form action="/comment/createComment/<%= post._id%>" method="POST">
+                  <input type="text" id="comment" name="comment" class="p-1 rounded-md lg:p-2 grow">
+                  <button class="bg-[#735d78] text-[#ebdee5] px-2 md:px-4 p-1 md:p-2 self-center tracking-wider rounded-md" type="submit">Post</button>
+                </form>
+              </div>
+              <div class="mt-4 flex flex-wrap p-2">
+                <ul class="">
+                    <% for(var j=0; j<comments.length; j++) {%>
+                    <li class="mb-4">
+                      <div class="">
+                        <p class="text-[#005458] font-semibold mr-2"><%= comments[j].user.userName %></p>
+                        <p class="mr-2 font-semibold"><%= comments[j].comment %></p>
+                      </div>
+                      <p class="text-[#005458] font-semibold"><%= comments[j].createdAt.toLocaleString() %></p>
+                    </li>
+                    <% } %>
+                </ul>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</div>
+
+<%- include('partials/footer.ejs') %>

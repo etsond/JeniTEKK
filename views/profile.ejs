@@ -1,0 +1,111 @@
+<%- include('partials/head.ejs') %>
+
+
+<div>
+  <body class="bg-[#fefae0]">
+    <%- include('partials/navbar.ejs') %>     
+  
+
+        <!--Create Posts-->
+        <div class="p-8">
+          
+            <!-- New PlayDate Post-->
+            <div class="bg-[#ccd5ae] shadow-md rounded-md p-4 mb-5 lg:mx-24">
+              <div class="text-center mb-7">
+                <h1 class="lg:text-3xl text-xl font-bold mb-4">Welcome Back <%= user.userName %></h1>
+                <p class="text-lg text-[#005458] font-semibold">Let's learn today</p>
+              </div>
+                <div class="flex flex-col justify-center items-center">
+                    <form class="w-full max-w-lg" action="/post/createPost" enctype="multipart/form-data" method="POST">
+                        <div class="flex flex-wrap gap-2 content-center">
+                            <div class="w-full px-3">
+                                <label class="form-control block tracking-wide font-bold mb-2" for="caption"></label>
+                                <input type="text" class="appearance-none block w-full py-3 px-4 mb-3 leading-tight rounded-md" id="caption" name="caption" placeholder="What did you learn">
+                                <label class="form-control block tracking-wide font-bold mb-2" for="location"></label>
+                                <input type="text" class="appearance-none block w-full py-3 px-4 mb-3 leading-tight rounded-md" id="location" name="location" placeholder="The definition of it?">
+                                <label class="form-control block tracking-wide font-bold mb-2" for="friends"></label>
+                                <input type="text" class="appearance-none block w-full py-3 px-4 mb-3 leading-tight rounded-md" id="friends" name="friends" placeholder="What can you use it for?">
+                                <label class="form-control block tracking-wide font-bold mb-2" for="grownups"></label>
+                                <input type="text" class="appearance-none block w-full py-3 px-4 mb-3 leading-tight rounded-md" id="grownups" name="grownups" placeholder="Explain it in your own words?">
+                                
+                                <p class="text-lg font-semibold text-[#333]">Snapshot of what you've learned?</p>
+                                <label class="block tracking-wide font-bold mb-2" for="imgUpload"></label>
+                                <input type="file" class="appearance-none block w-full py-3 px-4 mb-3 leading-tight rounded-md" id="imageUpload" name="file">
+                            </div>
+                            <!-- <textarea class="grow p-3 h-14 rounded-md" placeholder="Enter your playdate information here."></textarea> -->
+                        </div>
+                       
+                        <div class="flex items-center">
+                            <div class="grow text-right mt-3">
+                                <a href="/profile">
+                                <button type="submit" value="Upload" class="bg-[#1b8481] text-white px-6 py-1 rounded-md">Share</button>
+                                </a>
+                            </div>
+                        </div>
+
+
+
+
+                    </form>
+                </div>
+            </div>
+
+            <!--Profile Feed-->
+            <div class="mt-5 w-full mx-auto lg:mx-24">
+                <ul class="w-full flex-row gap-4 my-10 grid grid-cols-2 md:grid md:grid-cols-4">
+                    <% for(var i=0; i<posts.length; i++) {%>
+                    <li class="my-3 flex">
+                        <a href="/post/<%= posts[i]._id%>">
+                          <img class="img-fluid" src="<%= posts[i].image %>" alt="your picture">
+                        </a>
+                    </li>
+                   <% } %>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </body>
+</div>
+
+<%- include('partials/footer.ejs') %>
+
+
+
+                        <!-- <div class="flex items-center">
+    <div class="grow text-right mt-3">
+        <button type="submit" value="Upload" class="bg-[#1b8481] text-white px-6 py-1 rounded-md" onclick="showShareOptions()">Share</button>
+        <script>
+            function showShareOptions() {
+                var url = encodeURIComponent('your-website-url');
+                var caption = encodeURIComponent('your-caption');
+
+                // Show share options
+                var shareOptions = document.createElement('div');
+                shareOptions.innerHTML = `
+                    <div class="mt-2 text-left">
+                        <p class="text-sm mb-2">Choose a platform to share:</p>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-md mr-2" onclick="shareOnTwitter('${url}', '${caption}')">Twitter</button>
+                        <button class="bg-pink-500 text-white px-4 py-2 rounded-md mr-2" onclick="shareOnInstagram('${url}', '${caption}')">Instagram</button>
+                        <button class="bg-indigo-500 text-white px-4 py-2 rounded-md" onclick="shareOnFacebook('${url}', '${caption}')">Facebook</button>
+                    </div>
+                `;
+                document.body.appendChild(shareOptions);
+            }
+
+            function shareOnTwitter(url, caption) {
+                var twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(caption)}`;
+                window.open(twitterUrl, '_blank');
+            }
+
+            function shareOnInstagram(url, caption) {
+                var instagramUrl = `https://www.instagram.com/share?url=${encodeURIComponent(url)}&caption=${encodeURIComponent(caption)}`;
+                window.open(instagramUrl, '_blank');
+            }
+
+            function shareOnFacebook(url, caption) {
+                var facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(caption)}`;
+                window.open(facebookUrl, '_blank');
+            }
+        </script>
+    </div>
+</div> -->

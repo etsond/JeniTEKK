@@ -1,0 +1,73 @@
+<%- include("partials/head.ejs") %>
+
+<div class="min-h-screen py-40 bg-[bg-white]">
+  <div
+    class="shadow-lg bg-[#ccd5ae] w-3/6 m-auto p-4 after:block after:pb-[50%] items-center justify-center flex max-w-xl"
+  >
+    <div
+      class="col-6 mt-5 flex flex-row flex-wrap justify-center text-center p-4"
+    >
+      <i class="fa-solid fa-children text-5xl"></i>
+      <sub class="text-3xl md:text-4l mb-16">JeniTek</sub>
+      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+      <div class="alert alert-danger text-red-700"><%= el.msg %></div>
+      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+      messages.info.forEach( el => { %>
+      <div class="alert alert-info text-red-700"><%= el.msg %></div>
+      <% }) %> <% } %>
+
+      <form
+        action="/login"
+        method="POST"
+        class="w-full text-center m-auto mb-8"
+      >
+        <div class="mb-5">
+          <input
+            type="email"
+            class="form-control bg-transparent block w-full mx-auto text-center border-b border-[#333] cursor-pointer"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            name="email"
+            required
+          />
+          <label
+            for="exampleInputEmail1"
+            class="form-label block py-1.5 w-full text-left"
+            >Email address</label
+          >
+        </div>
+        <div class="mb-5">
+          <input
+            type="password"
+            class="form-control bg-transparent block w-full mx-auto text-center border-b border-[#333] cursor-pointer"
+            id="exampleInputPassword1"
+            name="password"
+            required
+          />
+          <label
+            for="exampleInputPassword1"
+            class="form-label block py-1.5 w-full text-left"
+            >Password</label
+          >
+        </div>
+        <button
+          type="submit"
+          class="px-4 p-3 uppercase border-2 border-[#333] rounded-md tracking-wider bg-[#735d77] text-[#ffffff]"
+        >
+          Log In
+        </button>
+      </form>
+
+      <div class="flex">
+        <a
+          href="/register"
+          class="p-3 px-4 rounded-md bg-white self-center tracking-wider mr-2"
+          >Sign up</a
+        >
+        <a href="/" class="p-3 px-4 bg-white self-center rounded-md ml-2"
+          ><i class="fa-solid fa-house"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>
