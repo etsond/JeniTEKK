@@ -29,8 +29,5 @@ module.exports = {
     console.log(`Received ${req.method} request for ${req.url}`);
     next();
   },
-  // Placeholder function for additional functionality
-  // additionalFunction: function (req, res, next) {
-   
-  // }
+  
 };
