@@ -1,19 +1,4 @@
-// module.exports = {
-//   ensureAuth: function (req, res, next) {
-//     if (req.isAuthenticated()) {
-//       return next();
-//     } else {
-//       res.redirect("/");
-//     }
-//   },
-//   ensureGuest: function (req, res, next) {
-//     if (!req.isAuthenticated()) {
-//       return next();
-//     } else {
-//       res.redirect("/playfeed");
-//     }
-//   },
-// };
+// Purpose: Middleware for authentication and access control
 
 
 module.exports = {
@@ -45,7 +30,7 @@ module.exports = {
     next();
   },
   // Placeholder function for additional functionality
-  additionalFunction: function (req, res, next) {
-    // Add your custom code here
-  }
+  // additionalFunction: function (req, res, next) {
+   
+  // }
 };

@@ -1,11 +1,11 @@
 {
-  "name": "binary-upload-boom",
+  "name": "jeni-tek",
   "version": "1.0.0",
-  "description": "100Devs Social Network",
+  "description": " Learning Network",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "MIT",
@@ -29,6 +29,9 @@
     "validator": "^13.6.0"
   },
   "devDependencies": {
+    "chai": "^4.3.8",
+    "chai-http": "^4.4.0",
+    "mocha": "^10.2.0",
     "tailwindcss": "^3.3.1"
   }
 }
