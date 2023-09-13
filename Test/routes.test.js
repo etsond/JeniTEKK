@@ -1,11 +1,15 @@
+// importing testing libraries and app
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../server'); 
 const expect = chai.expect;
 
+// adding chai HTTP plugin for making http requests
 chai.use(chaiHttp);
 
+// describing block for testing main routes
 describe('Main Routes', () => {
+    // test case : Should return status 200 For GET /
   it('should return status 200 for GET /', (done) => {
     chai.request(app)
       .get('/')
@@ -15,6 +19,7 @@ describe('Main Routes', () => {
       });
   });
 
+//   Test case : Should return status 200 For GET /profile
   it('should return status 200 for GET /profile', (done) => {
     chai.request(app)
       .get('/profile')
@@ -33,9 +38,10 @@ describe('Main Routes', () => {
       });
   });
 
+//   test case : Should return status 200 For GET /userProfile/:id
   it('should return status 200 for GET /userProfile/:id', (done) => {
-    // Replace ':id' with an actual user ID from your application
     chai.request(app)
+    //  Add a valid user id
       .get('/userProfile/:id')
       .end((err, res) => {
         expect(res).to.have.status(200);
@@ -43,6 +49,7 @@ describe('Main Routes', () => {
       });
   });
 
+//   test case : Should return status 200 For GET /login
   it('should return status 200 for GET /login', (done) => {
     chai.request(app)
       .get('/login')
@@ -51,9 +58,9 @@ describe('Main Routes', () => {
         done();
       });
   });
-
+// test case : Should return status 200 For POST /login
   it('should return status 200 for POST /login', (done) => {
-    // Add a valid login request body here
+    // TODO: Add a valid login request here
     chai.request(app)
       .post('/login')
       .send({ username: 'testuser', password: 'testpassword' })
@@ -62,6 +69,7 @@ describe('Main Routes', () => {
         done();
       });
   });
+//   test case : Should return status 200 For GET /logout
 
   it('should return status 200 for GET /logout', (done) => {
     chai.request(app)
@@ -72,6 +80,7 @@ describe('Main Routes', () => {
       });
   });
 
+//   test case : Should return status 200 For GET /register
   it('should return status 200 for GET /register', (done) => {
     chai.request(app)
       .get('/register')
@@ -81,8 +90,9 @@ describe('Main Routes', () => {
       });
   });
 
+//   test case : Should return status 200 For POST /register
   it('should return status 200 for POST /register', (done) => {
-    // Add a valid registration request body here
+    // Add a valid registration request body 
     chai.request(app)
       .post('/register')
       .send({ username: 'newuser', password: 'newpassword' })
